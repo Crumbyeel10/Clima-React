@@ -1,5 +1,6 @@
 import {useEffect,useState} from 'react'
 import getClima from '../services/getClima'
+import '../Styles/Clima.css'
 
 
 
@@ -50,14 +51,16 @@ const Clima = () => {
         return setTemp(Math.floor(temp - 273.15) + "° C" )
     }
 
+  
+
 
     return (
-        <div>
+        <div className='container'>
             <h1>{city}, {country}</h1>
             <img src={`http://openweathermap.org/img/wn/${imgclima}@4x.png`} alt=''/>
-            <h2>Temperature:  {temp}</h2>
-            <h2>Weather: {weather}</h2>
-            <button onClick={() => temperatureChange()} >Centigrados</button>
+            <h2>Temperatura:  {temp}</h2>
+            <h2>Clima: {weather}</h2>
+            <button className='btn-centi' onClick={() => temperatureChange()} >Centigrados</button>
 
         </div>
     )
