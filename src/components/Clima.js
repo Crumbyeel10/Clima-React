@@ -16,6 +16,8 @@ const Clima = () => {
     const [country, setCountry] = useState('')
     const [imgclima, setImgclima] = useState()
     const [weather, setWeather] = useState('')
+    const [far , setFar] = useState('°F')
+    
 
     //opteninedo position geografica
     navigator.geolocation.getCurrentPosition( (info) => {
@@ -34,7 +36,7 @@ const Clima = () => {
         getClima(lati,longi)
             .then(res =>{
                 console.log(res.data)
-                setTemp(res.data.main.temp)
+                setTemp(Math.floor(res.data.main.temp))
                 setImgclima(res.data.weather[0].icon)
                 setCity(res.data.name)
                 setCountry(res.data.sys.country)
@@ -45,10 +47,18 @@ const Clima = () => {
                 console.log(error)
             })
     },[lati,longi])
+    
 
     const temperatureChange = () =>{
         
-        return setTemp(Math.floor(temp - 273.15) + "° C" )
+        if (temp > 57 ){
+            return setTemp(Math.floor(temp - 273) ), setFar('°C')
+            setFar('°F')
+        }else{
+            return setTemp(Math.floor(temp + 273) ), setFar('°F')
+            
+        }
+        
     }
 
   
@@ -58,8 +68,8 @@ const Clima = () => {
         <div className='container'>
             <h1>{city}, {country}</h1>
             <img src={`http://openweathermap.org/img/wn/${imgclima}@4x.png`} alt=''/>
-            <h2>Temperatura:  {temp}</h2>
-            <h2>Clima: {weather}</h2>
+            <h2>Temperatura:  {temp}  {far}</h2>
+            <h2>Clima: {weather}  </h2>
             <button className='btn-centi' onClick={() => temperatureChange()} >Centigrados</button>
 
         </div>
