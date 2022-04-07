@@ -53,7 +53,7 @@ const Clima = () => {
         
         if (temp > 57 ){
             return setTemp(Math.floor(temp - 273) ), setFar('°C')
-            setFar('°F')
+            
         }else{
             return setTemp(Math.floor(temp + 273) ), setFar('°F')
             
